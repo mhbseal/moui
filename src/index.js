@@ -1,3 +1,2 @@
-﻿//import Switch from './Switch';
-//export default Switch;
-require('./Switch.js')
+﻿import './base.css';
+export Switch from './Switch';

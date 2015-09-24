@@ -1,2 +1,2 @@
-# tour-ui
-ctrip tour ui base on react
+# tourUI
+tourUI base on react

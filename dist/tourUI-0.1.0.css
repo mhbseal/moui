@@ -1,4 +1,4 @@
-﻿
+
 .js_shadow_root {
   font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;
   font-size: 14px;
@@ -100,8 +100,6 @@ i {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
-
 .icon-switch {
   height: 28px;
   width: 46px;
@@ -113,6 +111,9 @@ i {
   overflow: hidden;
   cursor: pointer;
   z-index: 1;
+}
+.icon-switch.disabled {
+  cursor: not-allowed;
 }
 .icon-switch::before {
   content: "";

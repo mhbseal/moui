@@ -1,38 +1,37 @@
-//import React from 'react';
-require("./style.css");
+import React from 'react/addons';
+import './switch.css';
 
-//let
-//  Switch, props, state;
-//
-//function noop() {
-//}
-//
-//Switch = React.createClass({
-//  getInitialState() {
-//    props = this.props;
-//    state = this.state;
-//    return {
-//      checked: props.checked || props.defaultChecked || false
-//    };
-//  },
-//  getDefaultProps() {
-//    props = this.props;
-//    state = this.state;
-//    return {
-//      defaultChecked: false,
-//      onChange: noop
-//    };
-//  },
-//  render() {
-//    return (
-//      <i className="icon-switch"></i>
-//    );
-//  },
-//  toggle() {
-//    let checked = !state.checked;
-//    this.setState({ checked: checked });
-//    props.onChange(checked);
-//  }
-//});
-//
-//export default Switch;
+let Switch = React.createClass({
+  getDefaultProps() {
+    return {
+      disabled: false,
+      defaultChecked: false,
+      onChange: () => {}
+    };
+  },
+  getInitialState() {
+    return {
+      checked: this.props.checked || this.props.defaultChecked || false
+    };
+  },
+  render() {
+    let
+      disabled = this.props.disabled,
+      cx = React.addons.classSet,
+      classes = cx({
+        'icon-switch': true,
+        'active': this.state.checked,
+        'disabled': disabled
+      });
+    return (
+      <i className={classes} onClick = {disabled ? () => {} : this.toggle}></i>
+    );
+  },
+  toggle() {
+    let checked = !this.state.checked;
+    this.setState({ checked: checked });
+    this.props.onChange(checked);
+  }
+});
+
+export default Switch;

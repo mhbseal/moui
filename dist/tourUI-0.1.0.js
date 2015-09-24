@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
+		module.exports = factory(require("react"));
 	else if(typeof define === 'function' && define.amd)
-		define([], factory);
+		define(["react"], factory);
 	else if(typeof exports === 'object')
-		exports["tourUI"] = factory();
+		exports["tourUI"] = factory(require("react"));
 	else
-		root["tourUI"] = factory();
-})(this, function() {
+		root["tourUI"] = factory(root["React"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_4__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -54,52 +54,99 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	//import Switch from './Switch';
-	//export default Switch;
-	__webpack_require__(1)
+	module.exports = __webpack_require__(1);
+
 
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	//import React from 'react';
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./style.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	'use strict';
 
-	//let
-	//  Switch, props, state;
-	//
-	//function noop() {
-	//}
-	//
-	//Switch = React.createClass({
-	//  getInitialState() {
-	//    props = this.props;
-	//    state = this.state;
-	//    return {
-	//      checked: props.checked || props.defaultChecked || false
-	//    };
-	//  },
-	//  getDefaultProps() {
-	//    props = this.props;
-	//    state = this.state;
-	//    return {
-	//      defaultChecked: false,
-	//      onChange: noop
-	//    };
-	//  },
-	//  render() {
-	//    return (
-	//      <i className="icon-switch"></i>
-	//    );
-	//  },
-	//  toggle() {
-	//    let checked = !state.checked;
-	//    this.setState({ checked: checked });
-	//    props.onChange(checked);
-	//  }
-	//});
-	//
-	//export default Switch;
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	__webpack_require__(2);
+
+	var _Switch2 = __webpack_require__(3);
+
+	var _Switch3 = _interopRequireDefault(_Switch2);
+
+	exports.Switch = _Switch3['default'];
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _reactAddons = __webpack_require__(4);
+
+	var _reactAddons2 = _interopRequireDefault(_reactAddons);
+
+	__webpack_require__(5);
+
+	var Switch = _reactAddons2['default'].createClass({
+	  displayName: 'Switch',
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      disabled: false,
+	      defaultChecked: false,
+	      onChange: function onChange() {}
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      checked: this.props.checked || this.props.defaultChecked || false
+	    };
+	  },
+	  render: function render() {
+	    var disabled = this.props.disabled,
+	        cx = _reactAddons2['default'].addons.classSet,
+	        classes = cx({
+	      'icon-switch': true,
+	      'active': this.state.checked,
+	      'disabled': disabled
+	    });
+	    return _reactAddons2['default'].createElement('i', { className: classes, onClick: disabled ? function () {} : this.toggle });
+	  },
+	  toggle: function toggle() {
+	    var checked = !this.state.checked;
+	    this.setState({ checked: checked });
+	    this.props.onChange(checked);
+	  }
+	});
+
+	exports['default'] = Switch;
+	module.exports = exports['default'];
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ])

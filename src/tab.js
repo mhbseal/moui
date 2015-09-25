@@ -1,10 +1,12 @@
-import React from 'react/addons';
-import './switch.css';
+﻿import React from 'react/addons';
+import './tab.css';
 
-const Switch = React.createClass({
+const Tab = React.createClass({
+  propTypes: {
+    onChange: React.PropTypes.func
+  },
   getDefaultProps() {
     return {
-      defaultChecked: false,
       onChange: () => {}
     };
   },
@@ -17,18 +19,24 @@ const Switch = React.createClass({
     let
       cx = React.addons.classSet,
       classes = cx({
-        'icon-switch': true,
         'active': this.state.checked
       });
     return (
-      <i className={classes} onClick = {this.toggle}></i>
+      <nav className="cm-tabs-nav">
+        <ul className="cm-tabs-title-list">
+          <li className="active">123</li>
+          <li className={classes}>123</li>
+          <li className={classes}>123</li>
+        </ul>
+        <i className="icon-active"></i>
+      </nav>
     );
   },
-  toggle() {
+  clickAction() {
     let checked = !this.state.checked;
     this.setState({ checked: checked });
     this.props.onChange(checked);
   }
 });
 
-export default Switch;
+export default Tab;

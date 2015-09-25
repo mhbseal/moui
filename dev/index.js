@@ -1,7 +1,13 @@
 import React from 'react/addons';
-import { Switch } from '../src/index.js';
+import { Switch, Tab } from '../src/index.js';
+
+const div = document.getElementsByTagName('div');
 
 React.render(
-  <Switch defaultChecked={true} />
-  , document.body
+  <Switch />
+  , div[0]
+);
+React.render(
+  <Tab />
+  , div[1]
 );

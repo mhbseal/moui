@@ -1,7 +1,7 @@
 /node_modules
 
 # webstorm配置
-#.idea
+.idea
 
 # mac cache
 .DS_Store

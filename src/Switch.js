@@ -1,5 +1,4 @@
 import React from 'react/addons';
-import './switch.css';
 
 const Switch = React.createClass({
   getDefaultProps() {
@@ -16,12 +15,19 @@ const Switch = React.createClass({
   render() {
     let
       cx = React.addons.classSet,
-      classes = cx({
-        'icon-switch': true,
-        'active': this.state.checked
+      classes1 = cx({
+        'cui-switch': true,
+        'current': this.state.checked
+      }),
+      classes2 = cx({
+        'cui-switch-bg': true,
+        'current': this.state.checked
       });
     return (
-      <i className={classes} onClick = {this.toggle}></i>
+      <div className={classes1} onClick={this.toggle}>
+        <div className={classes2}></div>
+        <div className="cui-switch-scroll"></div>
+      </div>
     );
   },
   toggle() {

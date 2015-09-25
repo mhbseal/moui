@@ -1,9 +1,9 @@
 ﻿import React from 'react/addons';
-import './tab.css';
 
 const Tab = React.createClass({
   propTypes: {
-    onChange: React.PropTypes.func
+    onChange: React.PropTypes.func,
+    data: React.PropTypes.array.isRequired
   },
   getDefaultProps() {
     return {
@@ -12,30 +12,29 @@ const Tab = React.createClass({
   },
   getInitialState() {
     return {
-      checked: this.props.checked || this.props.defaultChecked || false
+      activeKey: this.props.activeKey || this.props.defaultActiveKey || this.props.data[0].key
     };
   },
   render() {
     let
-      cx = React.addons.classSet,
-      classes = cx({
-        'active': this.state.checked
+      item = this.props.data.map(v => {
+        return (
+          <li className={v.key === this.state.activeKey ? 'cui-tab-current' : ''} onClick={this.clickAction.bind(this, v)}>
+            {v.name}
+          </li>
+        )
       });
+
     return (
-      <nav className="cm-tabs-nav">
-        <ul className="cm-tabs-title-list">
-          <li className="active">123</li>
-          <li className={classes}>123</li>
-          <li className={classes}>123</li>
-        </ul>
-        <i className="icon-active"></i>
-      </nav>
+      <ul className="cui-tab-mod">
+        {item}
+        <i className={"cui-tab-scrollbar cui-tabnum" + this.props.data.length}></i>
+      </ul>
     );
   },
-  clickAction() {
-    let checked = !this.state.checked;
-    this.setState({ checked: checked });
-    this.props.onChange(checked);
+  clickAction(v) {
+    this.setState({activeKey: v.key});
+    this.props.onChange(v);
   }
 });
 

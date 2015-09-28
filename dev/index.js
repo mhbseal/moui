@@ -1,16 +1,21 @@
 import React from 'react/addons';
-import { Switch, Tab } from '../src/index.js';
+import { Switch, Tab, Num } from '../src/index.js';
 
-let data = [
-  { key: 1, name: '中国' },
-  { key: 2, name: '美国' },
-  { key: 3, name: '日本' }
-]
-
-// 组件add到这里
+// 组件依次这样定义下去
 let components = [
-  <Switch />,
-  <Tab data={data} defaultActiveKey={2}/>
+  (() => <Switch />)(),
+  (() => {
+    let data = [
+      { key: 1, name: '中国' },
+      { key: 2, name: '美国' },
+      { key: 3, name: '日本' }
+    ];
+    return <Tab data={data} defaultActiveKey={2} />;
+  })(),
+  (() => <Num min={0} max={99} defaultValue={3} />)(),
+  //(() => {
+  //
+  //})()
 ];
 
 let insertComponent = component => React.render(component, document.body.appendChild(document.createElement("div")));

@@ -1,9 +1,11 @@
 import React from 'react/addons';
 
 const Switch = React.createClass({
+  propTypes: {
+    onChange: React.PropTypes.func
+  },
   getDefaultProps() {
     return {
-      defaultChecked: false,
       onChange: () => {}
     };
   },

@@ -7,22 +7,31 @@ const Alert = React.createClass({
     content: React.PropTypes.string.isRequired,
   },
   getDefaultProps() {
-    let self = this;
     return {
       btns: [{
-        name: '知道了',
-        handler: () => {
-          self.hide();
+        name: '取消',
+        handler() {
+          console.log('取消');
+          this.hide();
+        }
+      }, {
+        name: '确定',
+        handler() {
+          console.log('确定');
+          this.hide();
         }
       }]
     };
+  },
+  componentWillReceiveProps() {
+    this.setState({visible: this.props.visible});
   },
   render() {
     let
       props = this.props,
       btns = props.btns.map((btn) => {
         return (
-          <div className="cui-flexbd" onClick={btn.handler}>{btn.name}</div>
+          <div className="cui-flexbd" onClick={btn.handler.bind(this)}>{btn.name}</div>
         )
       });
 

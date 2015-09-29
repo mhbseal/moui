@@ -15,7 +15,39 @@ let components = [
   (() => <Num min={0} max={99} defaultValue={3} />)(),
   //(() => <Loading closeBtn={true} content={'loading...'} maskToHide={false} />)(),
   //(() => <Toast content={'输入的内容有误'} />)(),
-  (() => <Alert content={'确定删除？'} />)(),
+  (() => {
+    let Test = React.createClass({
+      getDefaultProps() {
+        return {
+          btns: [{
+            name: '知道了',
+            handler()  {
+              this.setState({visible: false});
+            }
+          }]
+        };
+      },
+      getInitialState() {
+        return {
+          visible: false
+        };
+      },
+      onAlert() {
+        this.setState({
+          visible: true
+        });
+      },
+      render() {
+        return (
+          <div>
+            <p onClick={this.onAlert}>按钮</p>
+            <Alert visible={this.state.visible} content={'确定删除？'} btns={this.props.btns} />
+          </div>
+        )
+      }
+    })
+    return <Test />;
+  })()
 ];
 
 let insertComponent = component => React.render(component, document.body.appendChild(document.createElement("div")));

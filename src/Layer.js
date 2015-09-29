@@ -14,7 +14,7 @@ const Layer = {
   },
   getInitialState() {
     return {
-      visible: true
+      visible: this.props.visible
     };
   },
   maskToHide() {

@@ -12,7 +12,7 @@ const Toast = React.createClass({
     };
   },
   componentDidMount() {
-    this.setTimer();
+    this.componentDidUpdate();
   },
   componentDidUpdate() {
     this.setTimer();

@@ -26,12 +26,12 @@ const Calendar = React.createClass({
       let
         time = props.startTime,
         year = time.getFullYear(),
-        newTime = date.add(time, 'Month', i),
-        newYear = newTime.getFullYear(),
-        newMonth = newTime.getMonth(),
+        changedTime = date.add(time, 'Month', i),
+        changedYear = changedTime.getFullYear(),
+        changedMonth = changedTime.getMonth(),
         daysComponent = [],
-        dayOfWeekOnFirst = (new Date(newYear, newMonth, 1)).getDay(),
-        days = [31, (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][newMonth];
+        dayOfWeekOnFirst = (new Date(changedYear, changedMonth, 1)).getDay(),
+        days = [31, (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][changedMonth];
 
       for(let j = 0; j < dayOfWeekOnFirst; j++) {
         daysComponent.push(
@@ -46,13 +46,12 @@ const Calendar = React.createClass({
       monthComponent.push(
         <div>
           <h1 className="cui_cldmonth">
-            {date.format(newTime, 'YYYY年M月')}
+            {date.format(changedTime, 'YYYY年M月')}
           </h1>
           <ul className="cui_cld_daybox">{daysComponent}</ul>
         </div>
       );
     };
-
 
     return (
       <div>

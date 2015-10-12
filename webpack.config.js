@@ -22,7 +22,7 @@ config = {
   },
   externals: [
     {
-      'react/addons': {
+      'react': {
         root: 'React',
         commonjs2: 'react',
         commonjs: 'react',

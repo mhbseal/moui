@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import { date } from './mo-0.2.0.min.js';
 
 const Calendar = React.createClass({
@@ -18,12 +18,13 @@ const Calendar = React.createClass({
       monthComponent = [],
       weekComponent = props.weekDays.map(weekDay => {
         return (
-          <li>{weekDay}</li>
+          <li key={weekDay}>{weekDay}</li>
         )
       });
 
     for (let i = 0; i < props.displayMonthNum; i++) {
       let
+        key = 0,
         time = props.startTime,
         year = time.getFullYear(),
         changedTime = date.add(time, 'Month', i),
@@ -35,16 +36,16 @@ const Calendar = React.createClass({
 
       for(let j = 0; j < dayOfWeekOnFirst; j++) {
         daysComponent.push(
-          <li className="cui_invalid"></li>
+          <li key={key++} className="cui_invalid"></li>
         )
       }
       for(let j = 0; j < days; j++) {
         daysComponent.push(
-          <li className="cui_calendar_item cui_cld_day_havetxt">{j+1}</li>
+          <li key={key++} className="cui_calendar_item cui_cld_day_havetxt">{j+1}</li>
         )
       }
       monthComponent.push(
-        <div>
+        <div key={i}>
           <h1 className="cui_cldmonth">
             {date.format(changedTime, 'YYYY年M月')}
           </h1>

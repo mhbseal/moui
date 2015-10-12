@@ -1,4 +1,4 @@
-﻿import React from 'react/addons';
+﻿import React from 'react';
 
 const Tab = React.createClass({
   propTypes: {
@@ -12,14 +12,14 @@ const Tab = React.createClass({
   },
   getInitialState() {
     return {
-      activeKey: this.props.activeKey || this.props.defaultActiveKey || this.props.data[0].key
+      active: this.props.active || this.props.defaultActive || this.props.data[0].key
     };
   },
   render() {
     let
       item = this.props.data.map(v => {
         return (
-          <li className={v.key === this.state.activeKey ? 'cui-tab-current' : ''} onClick={this.clickAction.bind(null, v)}>
+          <li key={v.name} className={v.name === this.state.active ? 'cui-tab-current' : ''} onClick={this.clickAction.bind(null, v)}>
             {v.name}
           </li>
         )
@@ -33,7 +33,7 @@ const Tab = React.createClass({
     );
   },
   clickAction(v) {
-    this.setState({activeKey: v.key});
+    this.setState({active: v.name});
     this.props.onChange(v);
   }
 });

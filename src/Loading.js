@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import Layer from './Layer';
 
 const Loading = React.createClass({

@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import Mask from './Mask';
 
 const Layer = {

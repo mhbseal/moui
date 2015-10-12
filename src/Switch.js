@@ -1,4 +1,5 @@
-import React from 'react/addons';
+import React from 'react';
+import classNames from 'classnames';
 
 const Switch = React.createClass({
   propTypes: {
@@ -16,13 +17,10 @@ const Switch = React.createClass({
   },
   render() {
     let
-      cx = React.addons.classSet,
-      classes1 = cx({
-        'cui-switch': true,
+      classes1 = classNames('cui-switch', {
         'current': this.state.checked
       }),
-      classes2 = cx({
-        'cui-switch-bg': true,
+      classes2 = classNames('cui-switch-bg', {
         'current': this.state.checked
       });
     return (

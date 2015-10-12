@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import Layer from './Layer';
 
 const LayerList = React.createClass({
@@ -31,7 +31,7 @@ const LayerList = React.createClass({
       props = this.props,
       item = this.props.items.map(item => {
         return (
-          <li onClick={props.itemAction.bind(this, item)}>{item.name}</li>
+          <li key={item.name} onClick={props.itemAction.bind(this, item)}>{item.name}</li>
         )
       });
       return (

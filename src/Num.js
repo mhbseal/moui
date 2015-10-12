@@ -1,4 +1,5 @@
-import React from 'react/addons';
+import React from 'react';
+import classNames from 'classnames';
 
 const Num = React.createClass({
   propTypes: {
@@ -20,13 +21,10 @@ const Num = React.createClass({
   },
   render() {
     let
-      cx = React.addons.classSet,
-      classes1 = cx({
-        'cm-adjust-minus': true,
+      classes1 = classNames('cm-adjust-minus', {
         'disabled': this.props.min === this.state.value
       }),
-      classes2 = cx({
-        'cm-adjust-plus': true,
+      classes2 = classNames('cm-adjust-plus', {
         'disabled': this.props.max === this.state.value
       }),
       input;

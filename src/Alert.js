@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import Layer from './Layer';
 
 const Alert = React.createClass({
@@ -31,7 +31,7 @@ const Alert = React.createClass({
       props = this.props,
       btns = props.btns.map((btn) => {
         return (
-          <div className="cui-flexbd" onClick={btn.handler.bind(this)}>{btn.name}</div>
+          <div key={btn.name} className="cui-flexbd" onClick={btn.handler.bind(this)}>{btn.name}</div>
         )
       });
 

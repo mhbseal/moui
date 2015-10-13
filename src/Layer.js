@@ -23,9 +23,6 @@ const Layer = {
   },
   createMask() {
     return <Mask onClick={this.maskToHide} />
-  },
-  hide() {
-    this.setState({visible: false});
   }
 };
 

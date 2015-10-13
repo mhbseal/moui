@@ -6,25 +6,8 @@ const Alert = React.createClass({
   propTypes: {
     content: React.PropTypes.string.isRequired,
   },
-  getDefaultProps() {
-    return {
-      btns: [{
-        name: '取消',
-        handler() {
-          console.log('取消');
-          this.hide();
-        }
-      }, {
-        name: '确定',
-        handler() {
-          console.log('确定');
-          this.hide();
-        }
-      }]
-    };
-  },
-  componentWillReceiveProps() {
-    this.setState({visible: this.props.visible});
+  componentWillReceiveProps(nextProps) {
+    this.setState({visible: nextProps.visible});
   },
   render() {
     let
@@ -38,7 +21,7 @@ const Alert = React.createClass({
     return (
       <div style={{display: this.state.visible ? 'block' : 'none'}}>
         <div className="cui-pop-box">
-          {props.titile ? <div className="cui-hd">{props.titile}</div> : ''}
+          { props.title ? <div className="cui-hd">{props.title}</div> : ''}
           <div className="cui-bd">
             <div className="cui-error-tips">{props.content}</div>
             <div className="cui-roller-btns">

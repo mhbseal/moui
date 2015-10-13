@@ -47,16 +47,10 @@ let components = [
           visible: true
         });
       },
-      hide() {
-        this.setState({
-          visible: false
-        });
-      },
       render() {
         return (
           <div>
             <p onClick={this.show}>showAlert</p>
-            <p onClick={this.hide}>hideAlert</p>
             <Alert visible={this.state.visible} {...this.props} />
           </div>
         )

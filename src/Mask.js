@@ -12,8 +12,7 @@ const Mask = React.createClass({
     return (
       <div className="cui-mask" style={style} onClick={this.props.onClick}></div>
     );
-  },
-
+  }
 });
 
 export default Mask;

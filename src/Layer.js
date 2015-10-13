@@ -22,7 +22,9 @@ const Layer = {
     props.needMask && props.maskToHide && this.setState({visible: false});
   },
   createMask() {
-    return <Mask onClick={this.maskToHide} />
+    if (this.props.needMask) {
+      return <Mask onClick={this.maskToHide} />
+    }
   }
 };
 

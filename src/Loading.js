@@ -4,13 +4,8 @@ import Layer from './Layer';
 const Loading = React.createClass({
   mixins: [Layer],
   propTypes: {
-    closeBtn: React.PropTypes.bool,
     content: React.PropTypes.string,
-  },
-  getDefaultProps() {
-    return {
-      closeBtn: false
-    };
+    closeBtn: React.PropTypes.bool,
   },
   render() {
     let

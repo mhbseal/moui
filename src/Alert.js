@@ -5,16 +5,14 @@ const Alert = React.createClass({
   mixins: [Layer],
   propTypes: {
     content: React.PropTypes.string.isRequired,
-  },
-  componentWillReceiveProps(nextProps) {
-    this.setState({visible: nextProps.visible});
+    btns: React.PropTypes.array.isRequired
   },
   render() {
     let
       props = this.props,
       btns = props.btns.map((btn) => {
         return (
-          <div key={btn.name} className="cui-flexbd" onClick={btn.handler.bind(this)}>{btn.name}</div>
+          <div key={btn.name} className="cui-flexbd" onClick={btn.handler.bind(this, btn)}>{btn.name}</div>
         )
       });
 

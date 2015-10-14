@@ -3,7 +3,9 @@ import { date } from './mo-0.2.0.min.js';
 
 const Calendar = React.createClass({
   propTypes: {
-    content: React.PropTypes.string,
+    startTime: React.PropTypes.object,
+    weekDays: React.PropTypes.array,
+    displayMonthNum: React.PropTypes.number,
   },
   getDefaultProps() {
     return {

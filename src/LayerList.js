@@ -4,32 +4,15 @@ import Layer from './Layer';
 const LayerList = React.createClass({
   mixins: [Layer],
   propTypes: {
-    content: React.PropTypes.string,
-  },
-  getDefaultProps() {
-    return {
-      items: [{
-        name: '中国'
-      }, {
-        name: '美国'
-      }, {
-        name: '俄罗斯'
-      }],
-      cancelName: '取消',
-      itemAction(item) {
-        console.log(item.name);
-        this.hide();
-      },
-      cancelAction() {
-        console.log('cancel');
-        this.hide();
-      }
-    };
+    items: React.PropTypes.array.isRequired,
+    cancelName: React.PropTypes.string.isRequired,
+    itemAction: React.PropTypes.func.isRequired,
+    cancelAction: React.PropTypes.func.isRequired,
   },
   render() {
     let
       props = this.props,
-      item = this.props.items.map(item => {
+      items = this.props.items.map(item => {
         return (
           <li key={item.name} onClick={props.itemAction.bind(this, item)}>{item.name}</li>
         )
@@ -38,7 +21,7 @@ const LayerList = React.createClass({
         <div style={{display: this.state.visible ? 'block' : 'none'}}>
           <div className="popup-operate">
             <ul className="list">
-              {item}
+              {items}
             </ul>
             <ul>
               <li className="cancel" onClick={props.cancelAction.bind(this)}>{props.cancelName}</li>

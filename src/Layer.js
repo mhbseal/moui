@@ -17,6 +17,9 @@ const Layer = {
       visible: this.props.visible
     };
   },
+  componentWillReceiveProps(nextProps) {
+    this.setState({visible: nextProps.visible});
+  },
   maskToHide() {
     let props = this.props;
     props.needMask && props.maskToHide && this.setState({visible: false});
@@ -25,7 +28,13 @@ const Layer = {
     if (this.props.needMask) {
       return <Mask onClick={this.maskToHide} />
     }
-  }
+  },
+  hide() {
+    this.setState({visible: false});
+  },
+  show() {
+    this.setState({visible: true});
+  },
 };
 
 export default Layer;

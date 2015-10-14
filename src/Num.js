@@ -4,14 +4,17 @@ import classNames from 'classnames';
 const Num = React.createClass({
   propTypes: {
     onChange: React.PropTypes.func,
+    min: React.PropTypes.number,
+    max: React.PropTypes.number,
+    step: React.PropTypes.number,
+    editable: React.PropTypes.bool,
   },
   getDefaultProps() {
     return {
       min: -Infinity,
       max: Infinity,
       step: 1,
-      editable: true,
-      onChange: () => {}
+      editable: true
     };
   },
   getInitialState() {

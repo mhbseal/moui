@@ -3,12 +3,9 @@ import classNames from 'classnames';
 
 const Switch = React.createClass({
   propTypes: {
-    onChange: React.PropTypes.func
-  },
-  getDefaultProps() {
-    return {
-      onChange: () => {}
-    };
+    onChange: React.PropTypes.func,
+    checked: React.PropTypes.bool,
+    defaultChecked: React.PropTypes.bool
   },
   getInitialState() {
     return {

@@ -5,11 +5,6 @@ const Tab = React.createClass({
     onChange: React.PropTypes.func,
     data: React.PropTypes.array.isRequired
   },
-  getDefaultProps() {
-    return {
-      onChange: () => {}
-    };
-  },
   getInitialState() {
     return {
       active: this.props.active || this.props.defaultActive || this.props.data[0].key
@@ -19,7 +14,7 @@ const Tab = React.createClass({
     let
       item = this.props.data.map(v => {
         return (
-          <li key={v.name} className={v.name === this.state.active ? 'cui-tab-current' : ''} onClick={this.clickAction.bind(null, v)}>
+          <li key={v.name} className={v.name === this.state.active ? 'cui-tab-current' : ''} onClick={this.onChange.bind(null, v)}>
             {v.name}
           </li>
         )
@@ -32,7 +27,7 @@ const Tab = React.createClass({
       </ul>
     );
   },
-  clickAction(v) {
+  onChange(v) {
     this.setState({active: v.name});
     this.props.onChange(v);
   }

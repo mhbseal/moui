@@ -21,13 +21,13 @@ const Switch = React.createClass({
         'current': this.state.checked
       });
     return (
-      <div className={classes1} onClick={this.toggle}>
+      <div className={classes1} onClick={this.onChange}>
         <div className={classes2}></div>
         <div className="cui-switch-scroll"></div>
       </div>
     );
   },
-  toggle() {
+  onChange() {
     let checked = !this.state.checked;
     this.setState({ checked: checked });
     this.props.onChange(checked);

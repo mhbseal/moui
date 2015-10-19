@@ -1,8 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Switch, Tab, Num, Loading, Toast, Alert, LayerList, Calendar } from '../src/index.js';
+import { Switch, Tab, Num, Loading, Toast, Alert, LayerList, Calendar, Slider } from '../src/index.js';
 
-// 组件依次这样定义下去
+// 组件insert到document中
+let insertComponent = component => {
+  let div = document.createElement("div");
+  div.style.marginBottom = '10px';
+  ReactDOM.render(component, document.body.appendChild(div));
+}
+
+// 一般组件依次这样定义下去
 let components = [
   (() => {
     let props = {
@@ -334,13 +341,52 @@ let components = [
       };
     return <Calendar {...props} />
   })(),
+  (() => {
+    let props = {
+      data: [
+        {
+          name: '中国',
+          bg: 'red',
+        },
+        {
+          name: '美国',
+          bg: 'green'
+        },
+        {
+          name: '日本',
+          bg: 'blue'
+        },
+        {
+          name: '中国1',
+          bg: 'white',
+        },
+        {
+          name: '美国1',
+          bg: 'yellow'
+        },
+        {
+          name: '日本1',
+          bg: 'orange'
+        }
+      ],
+      defaultActive: '美国',
+      wrapperRender(children) {
+        return (
+          <section ref="wrapper" style={{height:'102px', width: '302px', border: '1px solid black', margin: '0 auto', overflow: 'hidden'}}>{children}</section>
+        )
+      } ,
+      itemRender(item) {
+        return (
+          <div style={{width: '100px', height: '100px', background: item.bg, textAlign: 'center', lineHeight: '100px'}}>{item.name}</div>
+        )
+      },
+      onChange(item) {
+        console.log(item.name);
+      }
+    };
+    return <Slider {...props} />
+  })(),
 ];
 
 // 遍历且render
-let insertComponent = component => {
-  let div = document.createElement("div");
-  div.style.marginBottom = '10px';
-  ReactDOM.render(component, document.body.appendChild(div));
-}
-
-components.forEach(component => insertComponent(component))
+components.forEach(component => insertComponent(component));

@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import { date } from './mo-0.2.0.min.js';
 
 const Calendar = React.createClass({
@@ -74,7 +73,7 @@ const Calendar = React.createClass({
           actionClass = +this.state.selected == +actionDate ? 'selected-departdate' : '';
 
         daysComponent.push(
-          <li ref="day" key={key++} onClick={this.itemAction.bind(this, actionDate)} className={"cui_calendar_item cui_cld_day_havetxt " + actionClass}>{this.getDay(<em>{j + 1}</em>, changedYear, changedMonth, j + 1)}</li>
+          <li ref="day" key={key++} onClick={this.itemAction.bind(this, actionDate)} className={`cui_calendar_item cui_cld_day_havetxt ${actionClass}`}>{this.getDay(<em>{j + 1}</em>, changedYear, changedMonth, j + 1)}</li>
         )
       }
       monthComponent.push(

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import IScroll from './iscroll-lite.js';
+import IScroll from './iscroll.js';
 
 const Slider = React.createClass({
   propTypes: {
@@ -8,9 +8,11 @@ const Slider = React.createClass({
     data: React.PropTypes.array.isRequired
   },
   componentDidMount() {
-    new IScroll(this.refs.wrapper, {
-      scrollX: true
-    });
+    this.scroll = new IScroll(this.refs.wrapper, this.props.IScroll);
+  },
+  componentWillUnmount() {
+    this.scroll.destroy();
+    this.scroll = null;
   },
   render() {
     return this.props.wrapperRender(this.sliderRender());
@@ -20,12 +22,12 @@ const Slider = React.createClass({
       props = this.props,
       items = props.data.map((item) => {
         return (
-          <li key={item.name} className="cm-slide-item">{props.itemRender(item)}</li>
+          <li key={item.name} onClick={props.onChange.bind(this, item)} className="cm-slide-item">{props.itemRender(item)}</li>
         )
       });
 
     return (
-      <div className="cm-slide" style={{height: '100%', width: '600px'}}>
+      <div className="cm-slide" style={{width: props.scrollerSize}}>
         <ul className="cm-slide-list">
           {items}
         </ul>

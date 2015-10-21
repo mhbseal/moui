@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Switch, Tab, Num, Loading, Toast, Alert, LayerList, Calendar, Slider } from '../src/index.js';
+import { Switch, Tab, Num, Loading, Toast, Alert, LayerList, Calendar, Slider, ImgSlider } from '../src/index.js';
 
 // 组件insert到document中
 let insertComponent = component => {
@@ -380,11 +380,52 @@ let components = [
           <div style={{width: '100px', height: '100px', background: item.bg, textAlign: 'center', lineHeight: '100px'}}>{item.name}</div>
         )
       },
+      IScroll:  {
+        scrollX: true,
+        snap: 'li'
+      },
+      scrollerSize: '600px',
       onChange(item) {
         console.log(item.name);
       }
     };
     return <Slider {...props} />
+  })(),
+  (() => {
+    let props = {
+      data: [
+        {
+          src: 'http://images.cnitblog.com/blog/294743/201412/051803252488182.jpg'
+        },
+        {
+          src: 'http://images.cnitblog.com/blog/294743/201412/051803075458022.jpg'
+        },
+        {
+          src: 'http://images.cnitblog.com/blog/294743/201412/051803148429260.jpg'
+        },
+        {
+          src: 'http://images.cnitblog.com/blog/294743/201412/051803198737858.jpg'
+        }
+      ],
+      wrapperRender(children) {
+        return (
+          <section ref="wrapper" style={{width: '100%', overflow: 'hidden'}}>{children}</section>
+        )
+      } ,
+      itemRender(item) {
+        return (
+          <img src={item.src} />
+        )
+      },
+      IScroll:  {
+        scrollX: true,
+        snap: true
+      },
+      onChange(item) {
+        console.log(item.src);
+      }
+    };
+    return <ImgSlider {...props} />
   })(),
 ];
 

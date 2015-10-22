@@ -369,10 +369,10 @@ let components = [
           bg: 'orange'
         }
       ],
-      defaultActive: '美国',
+      defaultActive: 2,
       wrapperRender(children) {
         return (
-          <section ref="wrapper" style={{height:'102px', width: '302px', border: '1px solid black', margin: '0 auto', overflow: 'hidden'}}>{children}</section>
+          <section ref="wrapper" style={{width: '302px', height:'102px', border: '1px solid black', margin: '0 auto', overflow: 'hidden'}}>{children}</section>
         )
       } ,
       itemRender(item) {
@@ -380,12 +380,11 @@ let components = [
           <div style={{width: '100px', height: '100px', background: item.bg, textAlign: 'center', lineHeight: '100px'}}>{item.name}</div>
         )
       },
-      IScroll:  {
+      IScroll: {
         scrollX: true,
         snap: 'li'
       },
-      scrollerSize: '600px',
-      onChange(item) {
+      itemAction(item) {
         console.log(item.name);
       }
     };
@@ -411,17 +410,15 @@ let components = [
         return (
           <section ref="wrapper" style={{width: '100%', overflow: 'hidden'}}>{children}</section>
         )
-      } ,
+      },
+      scale: 2,
+      defaultActive: 1,
       itemRender(item) {
         return (
           <img src={item.src} />
         )
       },
-      IScroll:  {
-        scrollX: true,
-        snap: true
-      },
-      onChange(item) {
+      itemAction(item) {
         console.log(item.src);
       }
     };

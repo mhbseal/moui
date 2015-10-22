@@ -1,4 +1,8 @@
 ﻿import './main.css';
+import FastClick from 'fastclick';
+window.addEventListener('load', () => {
+  FastClick.attach(document.body);
+});
 export Switch from './Switch';
 export Tab from './Tab';
 export Num from './Num';

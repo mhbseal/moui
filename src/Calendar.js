@@ -9,6 +9,7 @@ const Calendar = React.createClass({
     MonthFormat: React.PropTypes.string,
     selected: React.PropTypes.object,
     specialDates: React.PropTypes.array,
+    itemAction: React.PropTypes.func
   },
   getDefaultProps() {
     return {
@@ -42,20 +43,15 @@ const Calendar = React.createClass({
   },
   render() {
     let
-      props = this.props,
+      { startTime, weekDays, displayMonthNum, MonthFormat} = this.props,
       monthComponent = [],
-      startTime = props.startTime || new Date(),
-      year = startTime.getFullYear(),
-      weekComponent = props.weekDays.map(weekDay => {
-        return (
-          <li key={weekDay}>{weekDay}</li>
-        )
-      });
+      sTime = startTime || new Date(),
+      year = sTime.getFullYear();
 
-    for (let i = 0; i < props.displayMonthNum; i++) {
+    for (let i = 0; i < displayMonthNum; i++) {
       let
         key = 0,
-        changedTime = date.add(startTime, 'Month', i),
+        changedTime = date.add(sTime, 'Month', i),
         changedYear = changedTime.getFullYear(),
         changedMonth = changedTime.getMonth(),
         daysComponent = [],
@@ -79,7 +75,7 @@ const Calendar = React.createClass({
       monthComponent.push(
         <div key={i}>
           <h1 className="cui_cldmonth">
-            {date.format(changedTime, props.MonthFormat)}
+            {date.format(changedTime, MonthFormat)}
           </h1>
           <ul className="cui_cld_daybox">{daysComponent}</ul>
         </div>
@@ -89,7 +85,11 @@ const Calendar = React.createClass({
     return (
       <div>
         <ul className="cui_cldweek" style={{position: 'static'}}>
-          {weekComponent}
+          {weekDays.map(weekDay => {
+            return (
+              <li key={weekDay}>{weekDay}</li>
+            )
+          })}
         </ul>
         <section className="cui_cldunit">
           {monthComponent}

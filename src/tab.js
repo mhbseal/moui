@@ -5,30 +5,45 @@ const Tab = React.createClass({
     onChange: React.PropTypes.func,
     data: React.PropTypes.array.isRequired
   },
-  getInitialState() {
+  getDefaultProps() {
     return {
-      active: this.props.active || this.props.defaultActive || this.props.data[0].key
+      data: [],
+      defaultActive: null,
+      active: null,
+      onChange: () => {}
     };
   },
-  render() {
+  getInitialState() {
     let
-      item = this.props.data.map(v => {
-        return (
-          <li key={v.name} className={v.name === this.state.active ? 'cui-tab-current' : ''} onClick={this.onChange.bind(null, v)}>
-            {v.name}
-          </li>
-        )
-      });
+      {active, defaultActive} = this.props,
+      ret = 0;
+
+    if (active != null) {
+      ret = active;
+    } else if (defaultActive != null) {
+      ret = defaultActive;
+    }
+
+    return { active: ret};
+  },
+  render() {
+    let data = this.props.data;
 
     return (
       <ul className="cui-tab-mod">
-        {item}
-        <i className={`cui-tab-scrollbar cui-tabnum${this.props.data.length}`}></i>
+        {data.map((v, i) => {
+          return (
+            <li key={i} className={i === this.state.active ? 'cui-tab-current' : ''} onClick={this.onChange.bind(null, v, i)}>
+              {v.name}
+            </li>
+          )
+        })}
+        <i className={`cui-tab-scrollbar cui-tabnum${data.length}`}></i>
       </ul>
     );
   },
-  onChange(v) {
-    this.setState({active: v.name});
+  onChange(v, i) {
+    this.setState({active: i});
     this.props.onChange(v);
   }
 });

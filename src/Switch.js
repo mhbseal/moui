@@ -7,10 +7,25 @@ const Switch = React.createClass({
     checked: React.PropTypes.bool,
     defaultChecked: React.PropTypes.bool
   },
-  getInitialState() {
+  getDefaultProps() {
     return {
-      checked: this.props.checked || this.props.defaultChecked || false
+      defaultChecked: null,
+      checked: null,
+      onChange: () => {}
     };
+  },
+  getInitialState() {
+    let
+      {checked, defaultChecked} = this.props,
+      ret = false;
+
+    if (checked != null) {
+      ret = checked;
+    } else if (defaultChecked != null) {
+      ret = defaultChecked;
+    }
+
+    return { checked: ret};
   },
   render() {
     let

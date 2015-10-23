@@ -4,6 +4,7 @@ import Layer from './Layer';
 const Toast = React.createClass({
   mixins: [Layer],
   propTypes: {
+    hideTime: React.PropTypes.number,
     content: React.PropTypes.string.isRequired,
   },
   getDefaultProps() {

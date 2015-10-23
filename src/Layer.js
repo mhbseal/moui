@@ -5,6 +5,7 @@ const Layer = {
   propTypes: {
     needMask: React.PropTypes.bool,
     maskToHide: React.PropTypes.bool,
+    visible: React.PropTypes.bool
   },
   getDefaultProps() {
     return {
@@ -21,8 +22,8 @@ const Layer = {
     this.setState({visible: nextProps.visible});
   },
   maskToHide() {
-    let props = this.props;
-    props.needMask && props.maskToHide && this.setState({visible: false});
+    let {needMask, maskToHide} = this.props;
+    needMask && maskToHide && this.setState({visible: false});
   },
   createMask() {
     if (this.props.needMask) {

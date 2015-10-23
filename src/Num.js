@@ -8,19 +8,32 @@ const Num = React.createClass({
     max: React.PropTypes.number,
     step: React.PropTypes.number,
     editable: React.PropTypes.bool,
+    defaultValue: React.PropTypes.number,
+    value: React.PropTypes.number
   },
   getDefaultProps() {
     return {
       min: -Infinity,
       max: Infinity,
       step: 1,
-      editable: true
+      editable: true,
+      defaultValue: null,
+      value: null,
+      onChange: () => {}
     };
   },
   getInitialState() {
-    return {
-      value: this.props.value || this.props.defaultValue || ''
-    };
+    let
+      {value, defaultValue} = this.props,
+      ret = 0;
+
+    if (value != null) {
+      ret = value;
+    } else if (defaultValue != null) {
+      ret = defaultValue;
+    }
+
+    return { value: ret};
   },
   render() {
     let
@@ -52,7 +65,6 @@ const Num = React.createClass({
       value = +this.state.value,
       stepNum = +props.step || 1;
 
-    if (props.disabled) return;
     value = type === 'down' ? value - stepNum : value + stepNum;
 
     this.setValue(value);

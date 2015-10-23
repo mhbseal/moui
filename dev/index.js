@@ -27,7 +27,7 @@ let components = [
         { name: '美国' },
         { name: '日本' }
       ],
-      defaultActive: '美国',
+      defaultActive: 1,
       onChange(item) {
         console.log(item.name);
       }
@@ -156,7 +156,6 @@ let components = [
           }, {
             name: '俄罗斯'
           }],
-          cancelName: '取消',
           itemAction(item) {
             console.log(item.name);
             this.hide();

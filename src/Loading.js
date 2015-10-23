@@ -9,9 +9,8 @@ const Loading = React.createClass({
   },
   render() {
     let
-      props = this.props,
-      hasText = props.content !== '',
-      closeBtn = props.closeBtn,
+      {content, closeBtn} = this.props,
+      hasText = content !== '',
       style;
 
     if (!hasText && !closeBtn) {
@@ -28,7 +27,7 @@ const Loading = React.createClass({
             <div className="cui-i cui-w-loading"></div>
             <div className="cui-i cui-m-logo"></div>
             {closeBtn ? <div className="cui-grayload-close" onClick={this.onClick}></div> : ''}
-            {hasText ? <div className="cui-grayload-bfont">{props.content}</div> : ''}
+            {hasText ? <div className="cui-grayload-bfont">{content}</div> : ''}
           </div>
         </div>
         {this.createMask()}

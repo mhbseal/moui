@@ -4,76 +4,78 @@ import IScroll from 'iscroll';
 
 const noop = () => {};
 
-const Slider = React.createClass({
-  propTypes: {
+class Slider extends React.Component {
+  static propTypes = {
     data: React.PropTypes.array.isRequired,
     wrapperRender: React.PropTypes.func.isRequired,
     itemRender: React.PropTypes.func.isRequired,
-    IScroll: React.PropTypes.object,
+    iScroll: React.PropTypes.object,
     defaultActive: React.PropTypes.number,
     active: React.PropTypes.number,
     scale: React.PropTypes.number
-  },
-  getDefaultProps() {
-    return {
-      data: [],
-      wrapperRender: noop,
-      itemRender: noop,
-      IScroll: {
-        scrollX: true
-      },
-      active: null,
-      defaultActive: null,
-      scale: null // w/h
-    };
-  },
-  getInitialState() {
-    return {
+  }
+  static defaultProps = {
+    data: [],
+    wrapperRender: noop,
+    itemRender: noop,
+    iScroll: {
+      scrollX: true
+    },
+    active: null,
+    defaultActive: null,
+    scale: null // w/h
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
       active: this.props.active || this.props.defaultActive || 0,
       itemWidth: null,
       itemHeight: null,
     };
-  },
+  }
   componentDidMount() {
     let
-      props = this.props,
-      itemWidth = parseInt(getComputedStyle(this.refs.ul.children[0]).width); // 计算单位宽度
+      {scale, iScroll} = this.props,
+      itemWidth = parseInt(getComputedStyle(this.getItemDom()).width); // 计算单位宽度
 
     this.setState({
       itemWidth: itemWidth,
-      itemHeight: itemWidth/props.scale
+      itemHeight: itemWidth/scale
     }, () => {
-      this.scroll = new IScroll(this.refs.wrapper, Object.assign({}, props.IScroll, {startX: -this.state.active * itemWidth}));
+      this.scroll = new IScroll(this.refs.wrapper, Object.assign({}, iScroll, {startX: -this.state.active * itemWidth}));
       this.scroll.on('scrollEnd', () => {
         this.setIndex(this.scroll.currentPage.pageX);
       });
     });
-  },
+  }
   componentWillUnmount() {
     this.scroll.destroy();
-  },
+  }
   render() {
-    let props = this.props;
+    let {wrapperRender, data, itemAction, itemRender} = this.props;
 
     return (
       <div>
-        {props.wrapperRender(<div className="cm-slide" style={{width: this.state.itemWidth * props.data.length}}>
+        {wrapperRender(<div className="cm-slide" style={{width: this.state.itemWidth * data.length}}>
           <ul ref="ul" className="cm-slide-list">
-            {props.data.map((item) => {
+            {data.map((item) => {
               return (
-                <li key={item.name} onClick={props.itemAction.bind(this, item)} className="cm-slide-item">{props.itemRender(item)}</li>
+                <li key={item.name} onClick={itemAction.bind(this, item)} className="cm-slide-item">{itemRender(item)}</li>
               )
             })}
           </ul>
         </div>)}
       </div>
     );
-  },
+  }
   setIndex(index) {
     if (this.state.active !== index) {
       this.setState({active: index});
     }
   }
-});
+  getItemDom() {
+    return this.refs.ul.children[0]
+  }
+};
 
 export default Slider;

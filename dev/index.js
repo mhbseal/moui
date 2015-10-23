@@ -380,7 +380,7 @@ let components = [
           <div style={{width: '100px', height: '100px', background: item.bg, textAlign: 'center', lineHeight: '100px'}}>{item.name}</div>
         )
       },
-      IScroll: {
+      iScroll: {
         scrollX: true,
         snap: 'li'
       },

@@ -12,11 +12,11 @@ var
 
 config = {
   entry: [
-    './src/index'
+    './src/tourUI'
   ],
   output: {
     path: './dist',
-    filename: 'tourUI-' + version + (isProd ? '.min' : '') + '.js',
+    filename: 'tourUI' + (isProd ? '.min' : '') + '.js',
     library: 'tourUI',
     libraryTarget: 'umd'
   },
@@ -37,7 +37,11 @@ config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('tourUI-' + version + (isProd ? '.min' : '') + '.css', { allChunks: true })
+    new ExtractTextPlugin('tourUI' + (isProd ? '.min' : '') + '.css', { allChunks: true }),
+    new webpack.BannerPlugin(
+      'tourUI v' + version + '\n' +
+      '(c) 2014-' + new Date().getFullYear() + ' Ctrip Tour'
+    )
   ]
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Switch, Tab, Num, Loading, Toast, Alert, LayerList, Calendar, Slider, ImgSlider } from '../src/index.js';
+import { Switch, Tab, Num, Loading, Toast, Alert, LayerList, Calendar, Slider, ImgSlider } from '../src/tourUI.js';
 
 // 组件insert到document中
 let insertComponent = component => {

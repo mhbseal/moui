@@ -1,5 +1,5 @@
 import React from 'react';
-import { date } from './mo-0.2.0.min.js';
+import { date } from 'mo2js';
 
 const Calendar = React.createClass({
   propTypes: {

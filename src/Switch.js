@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import './switch.css';
 
-const Switch = React.createClass({
-  propTypes: {
-    onChange: React.PropTypes.func,
+export default class Switch extends Component {
+  static defaultProps = {
+    defaultChecked: null,
+    checked: null,
+    onChange: () => {}
+  };
+  static propTypes = {
+    defaultChecked: React.PropTypes.bool,
     checked: React.PropTypes.bool,
-    defaultChecked: React.PropTypes.bool
-  },
-  getDefaultProps() {
-    return {
-      defaultChecked: null,
-      checked: null,
-      onChange: () => {}
-    };
-  },
-  getInitialState() {
+    onChange: React.PropTypes.func
+  };
+  constructor(props) {
+    super(props);
+
     let
-      {checked, defaultChecked} = this.props,
+      {checked, defaultChecked} = props,
       ret = false;
 
     if (checked != null) {
@@ -25,28 +26,28 @@ const Switch = React.createClass({
       ret = defaultChecked;
     }
 
-    return { checked: ret};
-  },
+    this.state = {
+      checked: ret
+    };
+  }
   render() {
     let
-      classes1 = classNames('cui-switch', {
+      classesSwitch = classNames('cui-switch', {
         'current': this.state.checked
       }),
-      classes2 = classNames('cui-switch-bg', {
+      classesSwitchBg = classNames('cui-switch-bg', {
         'current': this.state.checked
       });
     return (
-      <div className={classes1} onClick={this.onChange}>
-        <div className={classes2}></div>
+      <div className={classesSwitch} onClick={this.onChange}>
+        <div className={classesSwitchBg}></div>
         <div className="cui-switch-scroll"></div>
       </div>
     );
-  },
-  onChange() {
+  }
+  onChange = () => {
     let checked = !this.state.checked;
     this.setState({ checked: checked });
     this.props.onChange(checked);
   }
-});
-
-export default Switch;
+}

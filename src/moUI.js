@@ -1,4 +1,4 @@
-﻿import './main.css';
+﻿import './moUI.css';
 import FastClick from 'fastclick';
 window.addEventListener('load', () => {
   FastClick.attach(document.body);

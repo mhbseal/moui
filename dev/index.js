@@ -1,31 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Switch, Tab, Num, Loading, Toast, Alert, LayerList, Calendar, Slider, ImgSlider } from '../src/tourUI.js';
+import { Switch, Tab, Num, Loading, Toast, Alert, LayerList, Calendar, Slider, ImgSlider } from '../src/moUI.js';
 
-// 组件insert到document中
-let insertComponent = component => {
-  let div = document.createElement("div");
-  div.style.marginBottom = '10px';
-  ReactDOM.render(component, document.body.appendChild(div));
-}
-
-// 一般组件依次这样定义下去
+// 组件依次这样定义下去（组件使用方法也看这里）
 let components = [
+  // Switch 默认 false
   (() => {
     let props = {
-      defaultChecked: true,
+      defaultChecked: false,
       onChange(checked) {
-        console.log(checked);
+        console.log(`switch1: ${checked}`);
       }
     };
     return <Switch {...props} />;
   })(),
+  // Switch 默认 false，之前操作过为 true
+  (() => {
+    let props = {
+      defaultChecked: false,
+      checked: true,
+      onChange(checked) {
+        console.log(`switch2: ${checked}`);
+      }
+    };
+    return <Switch {...props} />;
+  })(),
+  // Tab
   (() => {
     let props = {
       data: [
         { name: '中国' },
         { name: '美国' },
-        { name: '日本' }
+        { name: '俄罗斯' }
       ],
       defaultActive: 1,
       onChange(item) {
@@ -34,10 +40,22 @@ let components = [
     };
     return <Tab {...props} />;
   })(),
+  // Num 可编辑，大小无限制，step = 3
+  (() => {
+    let props = {
+      step: 3,
+      editable: true,
+      onChange(value) {
+        console.log(value);
+      }
+    };
+    return <Num {...props} />;
+  })(),
+  // Num 默认值3，最小0，最大5
   (() => {
     let props = {
       min: 0,
-      max: 99,
+      max: 5,
       defaultValue: 3,
       onChange(value) {
         console.log(value);
@@ -45,6 +63,7 @@ let components = [
     };
     return <Num {...props} />;
   })(),
+  // Loading
   (() => {
     let LoadingDemo = React.createClass({
       getDefaultProps() {
@@ -424,6 +443,13 @@ let components = [
     return <ImgSlider {...props} />
   })(),
 ];
+
+// 组件insert到document中
+let insertComponent = component => {
+  let div = document.createElement("div");
+  div.style.marginBottom = '10px';
+  ReactDOM.render(component, document.body.appendChild(div));
+}
 
 // 遍历且render
 components.forEach(component => insertComponent(component));

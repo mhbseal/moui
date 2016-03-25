@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Mask = React.createClass({
+export default class Mask extends Component {
   render() {
     let style = {
       width: '100%',
@@ -13,6 +13,4 @@ const Mask = React.createClass({
       <div className="cui-mask" style={style} onClick={this.props.onClick}></div>
     );
   }
-});
-
-export default Mask;
+}

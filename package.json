@@ -1,13 +1,14 @@
 {
-  "name": "tourUI",
-  "description": "tourUI base on react",
-  "version": "0.1.0",
-  "author": "ctrip tour",
-  "homepage": "http://github.com/mhbseal/tourUI",
+  "name": "moUI",
+  "description": "moUI for mobile web,base on react",
+  "version": "0.2.0",
+  "author": "Mu Haibao <mhbseal@163.com>",
+  "homepage": "http://github.com/mhbseal/moUI",
+  "license": "MIT",
   "scripts": {
-    "build": "npm run build.dev & npm run build.prod",
-    "build.dev": "webpack --dev",
-    "build.prod": "webpack --prod",
+    "build": "npm run build:dev & npm run build:prod",
+    "build:dev": "webpack --dev",
+    "build:prod": "webpack --prod",
     "server": "node webpack.dev.server --hot"
   },
   "devDependencies": {

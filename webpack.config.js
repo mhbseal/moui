@@ -7,17 +7,16 @@ var
   pkg = require('./package.json'),
   path = require('path'),
   version = pkg.version,
-  homePage = pkg.homepage,
   config, loaders;
 
 config = {
   entry: [
-    './src/tourUI'
+    './src/moUI'
   ],
   output: {
     path: './dist',
-    filename: 'tourUI' + (isProd ? '.min' : '') + '.js',
-    library: 'tourUI',
+    filename: 'moUI' + (isProd ? '.min' : '') + '.js',
+    library: 'moUI',
     libraryTarget: 'umd'
   },
   externals: [
@@ -39,12 +38,13 @@ config = {
   plugins: [
     new ExtractTextPlugin('tourUI' + (isProd ? '.min' : '') + '.css', { allChunks: true }),
     new webpack.BannerPlugin(
-      'tourUI v' + version + '\n' +
-      '(c) 2014-' + new Date().getFullYear() + ' Ctrip Tour'
+      'moUI v' + version + '\n' +
+      '(c) 2014-' + new Date().getFullYear() + ' Mu Haibao'
     )
   ]
 };
 
+// 生产增加2个plugin，压缩体积、防止警告
 if (isProd) {
   config.plugins.push(
     new webpack.DefinePlugin({
@@ -60,6 +60,7 @@ if (isProd) {
   );
 };
 
+// 开发时候起server且引入hmr
 if (isHot) {
   loaders = config.module.loaders;
   loaders[0].loaders.unshift('react-hot');
@@ -71,8 +72,8 @@ if (isHot) {
     path: path.join(__dirname, 'dev'),
     filename: 'bundle.js'
   };
-  config.externals.pop();
-  config.plugins.pop();
+  config.externals = null;
+  config.plugins = [];
   config.plugins.push(
     new webpack.HotModuleReplacementPlugin()
   );

@@ -1,21 +1,24 @@
-﻿import React from 'react';
+﻿import React, { Component, PropTypes } from 'react';
+import './tab.css';
 
-const Tab = React.createClass({
-  propTypes: {
-    onChange: React.PropTypes.func,
-    data: React.PropTypes.array.isRequired
-  },
-  getDefaultProps() {
-    return {
-      data: [],
-      defaultActive: null,
-      active: null,
-      onChange: () => {}
-    };
-  },
-  getInitialState() {
+export default class Tab extends Component {
+  static defaultProps = {
+    data: [],
+    defaultActive: null,
+    active: null,
+    onChange: () => {}
+  };
+  static propTypes = {
+    data: React.PropTypes.array.isRequired,
+    defaultChecked: React.PropTypes.bool,
+    checked: React.PropTypes.bool,
+    onChange: React.PropTypes.func
+  };
+  constructor(props) {
+    super(props);
+
     let
-      {active, defaultActive} = this.props,
+      {active, defaultActive} = props,
       ret = 0;
 
     if (active != null) {
@@ -24,28 +27,28 @@ const Tab = React.createClass({
       ret = defaultActive;
     }
 
-    return { active: ret};
-  },
+    this.state = {
+      active: ret
+    };
+  }
   render() {
     let data = this.props.data;
 
     return (
       <ul className="cui-tab-mod">
-        {data.map((v, i) => {
+        {data.map((item, i) => {
           return (
-            <li key={i} className={i === this.state.active ? 'cui-tab-current' : ''} onClick={this.onChange.bind(null, v, i)}>
-              {v.name}
+            <li key={i} className={i === this.state.active ? 'cui-tab-current' : ''} onClick={this.onChange.bind(null, item, i)}>
+              {item.name}
             </li>
           )
         })}
         <i className={`cui-tab-scrollbar cui-tabnum${data.length}`}></i>
       </ul>
     );
-  },
-  onChange(v, i) {
-    this.setState({active: i});
-    this.props.onChange(v);
   }
-});
-
-export default Tab;
+  onChange = (item, i) => {
+    this.setState({active: i});
+    this.props.onChange(item);
+  }
+}

@@ -1,0 +1,124 @@
+.cui-tab-mod {
+  display          : -webkit-box;
+  display          : -moz-box;
+  display          : -ms-flexbox;
+  display          : -webkit-flex;
+  display          : flex;
+  height           : 43px;
+  line-height      : 43px;
+  border-bottom    : #bcbcbc 1px solid;
+  background-color : #fafafa;
+  color            : #666;
+  font-size        : 15px;
+  position         : relative;
+  display          : table\9;
+  width            : 100%
+}
+.cui-tab-mod li {
+  text-align       : center;
+  -webkit-box-flex : 1;
+  -moz-box-flex    : 1;
+  -webkit-flex     : 1;
+  -ms-flex         : 1;
+  flex             : 1;
+  display          : table-cell\9
+}
+.cui-tab-mod li.cui-tab-current {
+  color : #099fde
+}
+.cui-tab-mod .cui-tab-scrollbar {
+  position           : absolute;
+  left               : 0;
+  height             : 4px;
+  bottom             : -1px;
+  background-color   : #099fde;
+  -webkit-transition : -webkit-transform 300ms ease-in-out;
+  -moz-transition    : -moz-transform 300ms ease-in-out;
+  -ms-transition     : -ms-transform 300ms ease-in-out;
+  transition         : transform 300ms ease-in-out;
+  z-index            : -1
+}
+.cui-tabnum2 {
+  width : 50%
+}
+.cui-tabnum3 {
+  width : 33.33333%
+}
+.cui-tabnum4 {
+  width : 25%
+}
+.cui-tabnum5 {
+  width : 20%
+}
+.cui-tabnum6 {
+  width : 16.66666%
+}
+.cui-tab-mod li.cui-tab-current ~ .cui-tab-scrollbar {
+  z-index : 2
+}
+.cui-tab-mod li:nth-of-type(1).cui-tab-current ~ .cui-tab-scrollbar {
+  -webkit-transform : translate3d(0, 0, 0);
+  -moz-transform    : translate3d(0, 0, 0);
+  -ms-transform     : translate3d(0, 0, 0);
+  transform         : translate3d(0, 0, 0)
+}
+.cui-tab-mod li:nth-of-type(2).cui-tab-current ~ .cui-tab-scrollbar {
+  -webkit-transform : translate3d(100%, 0, 0);
+  -moz-transform    : translate3d(100%, 0, 0);
+  -ms-transform     : translate3d(100%, 0, 0);
+  transform         : translate3d(100%, 0, 0)
+}
+.cui-tab-mod li:nth-of-type(3).cui-tab-current ~ .cui-tab-scrollbar {
+  -webkit-transform : translate3d(200%, 0, 0);
+  -moz-transform    : translate3d(200%, 0, 0);
+  -ms-transform     : translate3d(200%, 0, 0);
+  transform         : translate3d(200%, 0, 0)
+}
+.cui-tab-mod li:nth-of-type(4).cui-tab-current ~ .cui-tab-scrollbar {
+  -webkit-transform : translate3d(300%, 0, 0);
+  -moz-transform    : translate3d(300%, 0, 0);
+  -ms-transform     : translate3d(300%, 0, 0);
+  transform         : translate3d(300%, 0, 0)
+}
+.cui-tab-mod li:nth-of-type(5).cui-tab-current ~ .cui-tab-scrollbar {
+  -webkit-transform : translate3d(400%, 0, 0);
+  -moz-transform    : translate3d(400%, 0, 0);
+  -ms-transform     : translate3d(400%, 0, 0);
+  transform         : translate3d(400%, 0, 0)
+}
+.cui-tab-mod li:nth-of-type(6).cui-tab-current ~ .cui-tab-scrollbar {
+  -webkit-transform : translate3d(500%, 0, 0);
+  -moz-transform    : translate3d(500%, 0, 0);
+  -ms-transform     : translate3d(500%, 0, 0);
+  transform         : translate3d(500%, 0, 0)
+}
+.cui-tab-mod li:last-of-type.cui-tab-current + .cui-tab-scrollbar.cui-tabnum2 {
+  -webkit-transform : translate3d(100%, 0, 0);
+  -moz-transform    : translate3d(100%, 0, 0);
+  -ms-transform     : translate3d(100%, 0, 0);
+  transform         : translate3d(100%, 0, 0)
+}
+.cui-tab-mod li:last-of-type.cui-tab-current + .cui-tab-scrollbar.cui-tabnum3 {
+  -webkit-transform : translate3d(200%, 0, 0);
+  -moz-transform    : translate3d(200%, 0, 0);
+  -ms-transform     : translate3d(200%, 0, 0);
+  transform         : translate3d(200%, 0, 0)
+}
+.cui-tab-mod li:last-of-type.cui-tab-current + .cui-tab-scrollbar.cui-tabnum4 {
+  -webkit-transform : translate3d(300%, 0, 0);
+  -moz-transform    : translate3d(300%, 0, 0);
+  -ms-transform     : translate3d(300%, 0, 0);
+  transform         : translate3d(300%, 0, 0)
+}
+.cui-tab-mod li:last-of-type.cui-tab-current + .cui-tab-scrollbar.cui-tabnum5 {
+  -webkit-transform : translate3d(400%, 0, 0);
+  -moz-transform    : translate3d(400%, 0, 0);
+  -ms-transform     : translate3d(400%, 0, 0);
+  transform         : translate3d(400%, 0, 0)
+}
+.cui-tab-mod li:last-of-type.cui-tab-current + .cui-tab-scrollbar.cui-tabnum6 {
+  -webkit-transform : translate3d(500%, 0, 0);
+  -moz-transform    : translate3d(500%, 0, 0);
+  -ms-transform     : translate3d(500%, 0, 0);
+  transform         : translate3d(500%, 0, 0)
+}

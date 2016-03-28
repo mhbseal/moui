@@ -1,0 +1,23 @@
+.popup-operate {
+    z-index: 3004;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.popup-operate ul {
+    margin: 10px;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.popup-operate ul li {
+    height: 44px;
+    margin: 1px 0;
+    line-height: 44px;
+    text-align: center;
+    font-size: 20px;
+    color: #157efb;
+    background-color: #FFF;
+}

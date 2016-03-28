@@ -1,0 +1,10 @@
+.cm-slide {
+    overflow : hidden;
+    position : relative;
+}
+.cm-slide .cm-slide-list {
+    width : 100%
+}
+.cm-slide .cm-slide-list .cm-slide-item {
+    float : left
+}

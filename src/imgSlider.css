@@ -1,0 +1,15 @@
+.cm-slide--full-img img {
+    width: 100%
+}
+.cui-slide-nav-item {
+    overflow: hidden;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, .6);
+    float: left;
+    margin: 0 5px;
+    border-radius: 50%
+}
+.cui-slide-nav-item-current {
+    background: rgba(9, 159, 222, 1)
+}

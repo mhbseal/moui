@@ -1,19 +1,57 @@
-import React from 'react';
-import Layer from './Layer';
+import React, { Component, PropTypes } from 'react';
+import Mask from './Mask';
+import './layer.css';
+import './alert.css';
 
-const Alert = React.createClass({
-  mixins: [Layer],
-  propTypes: {
+export default class Alert extends Component {
+  static defaultProps = {
+    needMask: true,
+    maskToHide: false,
+    visible: false,
+    title: '',
+    content: '',
+    btns: []
+  };
+  static propTypes = {
+    needMask: React.PropTypes.bool,
+    maskToHide: React.PropTypes.bool,
+    visible: React.PropTypes.bool,
     title: React.PropTypes.string,
     content: React.PropTypes.string.isRequired,
     btns: React.PropTypes.array.isRequired
-  },
+  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      visible: true
+    };
+  }
+  componentDidMount() {
+    let
+      layer = this.refs.layer,
+      h = layer.clientHeight,
+      w = layer.clientWidth;
+
+    this.setState({
+      style: {
+        marginTop: - h/2,
+        marginLeft: - w/2
+      },
+      visible: this.props.visible
+    })
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({visible: nextProps.visible});
+  }
   render() {
-    let { btns, title, content } = this.props;
+    let
+      { btns, title, content } = this.props,
+      { visible, style } = this.state;
 
     return (
-      <div style={{display: this.state.visible ? 'block' : 'none'}}>
-        <div className="cui-pop-box">
+      <div style={{display: visible ? 'block' : 'none'}}>
+        <div ref="layer" className="cui-layer cui-pop-box" style={style}>
           { title ? <div className="cui-hd">{title}</div> : ''}
           <div className="cui-bd">
             <div className="cui-error-tips">{content}</div>
@@ -26,10 +64,11 @@ const Alert = React.createClass({
             </div>
           </div>
         </div>
-        {this.createMask()}
+        <Mask layer={this} />
       </div>
     );
   }
-});
-
-export default Alert;
+  hide = () => {
+    this.setState({visible: false});
+  }
+}

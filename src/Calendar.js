@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { date } from 'mo2js';
+import './calendar.css';
 
-const Calendar = React.createClass({
-  propTypes: {
+export default class CaldayComponentendar extends Component {
+  static defaultProps = {
+    weekDays: ['日', '一', '二', '三', '四', '五', '六'],
+    displayMonthNum: 3,
+    startTime: null,
+    MonthFormat: 'YYYY年M月',
+    selected: null,
+    specialDates: []
+  };
+  static propTypes = {
     weekDays: React.PropTypes.array,
     displayMonthNum: React.PropTypes.number,
     startTime: React.PropTypes.object,
@@ -10,37 +19,14 @@ const Calendar = React.createClass({
     selected: React.PropTypes.object,
     specialDates: React.PropTypes.array,
     itemAction: React.PropTypes.func
-  },
-  getDefaultProps() {
-    return {
-      weekDays: ['日', '一', '二', '三', '四', '五', '六'],
-      displayMonthNum: 3,
-      startTime: null,
-      MonthFormat: 'YYYY年M月',
-      selected: null,
-      specialDates: []
-    };
-  },
-  getInitialState() {
-    return {
-      selected: this.props.selected
-    };
-  },
-  getDay(dayComponent, year, month, day) {
-    this.props.specialDates.forEach(dates => {
-      for (let key in dates.date) {
-        let ret = dates.handler(key, dates.date[key]);
+  };
+  constructor(props) {
+    super(props);
 
-        if (ret.year && ret.year != year || ret.month && ret.month - 1 != month || ret.day && ret.day != day) {
-          continue;
-        }
-
-        dayComponent = ret.render(dayComponent);
-        break;
-      }
-    })
-    return dayComponent;
-  },
+    this.state = {
+      selected: props.selected
+    };
+  }
   render() {
     let
       { startTime, weekDays, displayMonthNum, MonthFormat} = this.props,
@@ -96,10 +82,23 @@ const Calendar = React.createClass({
         </section>
       </div>
     );
-  },
-  itemAction(actionDate) {
+  }
+  itemAction = (actionDate) => {
     this.props.itemAction(actionDate, date.format) !== false && this.setState({selected: actionDate});
   }
-});
+  getDay = (dayComponent, year, month, day) => {
+    this.props.specialDates.forEach(dates => {
+      for (let key in dates.date) {
+        let ret = dates.handler(key, dates.date[key]);
 
-export default Calendar;
+        if (ret.year && ret.year != year || ret.month && ret.month - 1 != month || ret.day && ret.day != day) {
+          continue;
+        }
+
+        dayComponent = ret.render(dayComponent);
+        break;
+      }
+    })
+    return dayComponent;
+  }
+}

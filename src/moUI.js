@@ -12,4 +12,4 @@ export Alert from './Alert';
 export LayerList from './LayerList';
 export Calendar from './Calendar';
 export Slider from './Slider';
-export ImgSlider from './Image.Slider';
+export ImgSlider from './ImgSlider';

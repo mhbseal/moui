@@ -1,42 +1,57 @@
-import React from 'react';
-import Layer from './Layer';
+import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
+import Mask from './Mask';
+import './layer.css';
+import './loading.css';
 
-const Loading = React.createClass({
-  mixins: [Layer],
-  propTypes: {
+export default class Loading extends Component {
+  static defaultProps = {
+    needMask: true,
+    maskToHide: false,
+    visible: false,
+    content: '',
+    closeBtn: false
+  };
+  static propTypes = {
+    needMask: React.PropTypes.bool,
+    maskToHide: React.PropTypes.bool,
+    visible: React.PropTypes.bool,
     content: React.PropTypes.string,
-    closeBtn: React.PropTypes.bool,
-  },
+    closeBtn: React.PropTypes.bool
+  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      visible: props.visible
+    };
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({visible: nextProps.visible});
+  }
   render() {
     let
       {content, closeBtn} = this.props,
       hasText = content !== '',
-      style;
-
-    if (!hasText && !closeBtn) {
-      style = {
-        width: 80,
-        height: 70,
-      }
-    };
+      classesGrayload = classNames('cui-grayload-text', {
+        'cui-grayload-text-min': !hasText && !closeBtn
+      });
 
     return (
       <div style={{display: this.state.visible ? 'block' : 'none'}}>
         <div className="cui-layer cui-loading">
-          <div className="cui-grayload-text" style={style}>
+          <div className={classesGrayload}>
             <div className="cui-i cui-w-loading"></div>
             <div className="cui-i cui-m-logo"></div>
-            {closeBtn ? <div className="cui-grayload-close" onClick={this.onClick}></div> : ''}
+            {closeBtn ? <div className="cui-grayload-close" onClick={this.hide}></div> : ''}
             {hasText ? <div className="cui-grayload-bfont">{content}</div> : ''}
           </div>
         </div>
-        {this.createMask()}
+        <Mask layer={this}/>
       </div>
     );
-  },
-  onClick() {
-    this.hide();
   }
-});
-
-export default Loading;
+  hide = () => {
+    this.setState({visible: false});
+  }
+}

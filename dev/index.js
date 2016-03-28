@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Switch, Tab, Num, Loading, Toast, Alert, LayerList, Calendar, Slider, ImgSlider } from '../src/moUI.js';
 
@@ -63,70 +63,95 @@ let components = [
     };
     return <Num {...props} />;
   })(),
-  // Loading
+  // Loading 默认状态，有蒙版，无关闭按钮，无loading文字，2秒后消失
   (() => {
-    let LoadingDemo = React.createClass({
-      getDefaultProps() {
-        return {
-          content: 'loading...',
-          closeBtn: true,
-          needMask: false
-        };
-      },
-      getInitialState() {
-        return {
-          visible: false
-        };
-      },
-      show() {
+    class LoadingDemo extends Component {
+      state = {
+        visible: false
+      }
+      show = () => {
         this.setState({visible: true});
-      },
-      hide() {
-        this.setState({visible: false});
-      },
+        setTimeout(() => {
+          this.setState({visible: false});
+        }, 2000)
+      }
       render() {
         return (
           <div>
-            <span onClick={this.show} className="btn-secondary mar_r_10">showLoading</span>
-            <span onClick={this.hide} className="btn-secondary">hideLoading</span>
-            <Loading visible={this.state.visible} {...this.props} />
+            <span onClick={this.show}>showLoading-1</span>
+            <Loading visible={this.state.visible} />
           </div>
         )
       }
-    })
+    };
     return <LoadingDemo />;
   })(),
+  // Loading 带关闭按钮，有loading文字
   (() => {
-    let ToastDemo = React.createClass({
-      getDefaultProps() {
-        return {
-          content: '输入的内容有误',
-          hideTime: 1000
-        };
-      },
-      getInitialState() {
-        return {
-          visible: false
-        };
-      },
-      show() {
+    class LoadingDemo extends Component {
+      state = {
+        visible: false
+      }
+      show = () => {
         this.setState({visible: true});
-      },
+      }
+      hide = () => {
+        this.setState({visible: false});
+      }
       render() {
+        let props = {
+          needMask: false,
+          visible: this.state.visible,
+          content: '加载中...',
+          closeBtn: true
+        }
         return (
           <div>
-            <span onClick={this.show} className="btn-secondary">showToast</span>
-            <Toast visible={this.state.visible} {...this.props} />
+            <span onClick={this.show}>showLoading-2</span>&nbsp;
+            <span onClick={this.hide}>hideLoading-2</span>
+            <Loading {...props} />
           </div>
         )
       }
-    })
+    };
+    return <LoadingDemo />;
+  })(),
+  // Toast
+  (() => {
+    class ToastDemo extends Component {
+      state = {
+        visible: false
+      }
+      show = () => {
+        this.setState({visible: true});
+      }
+      render() {
+        let props = {
+          visible: this.state.visible,
+          content: '输入的内容有误'
+        }
+        return (
+          <div>
+            <span onClick={this.show}>showToast</span>
+            <Toast {...props} />
+          </div>
+        )
+      }
+    };
     return <ToastDemo />;
   })(),
+  // Alert 带标题、2个按钮
   (() => {
-    let AlertDemo = React.createClass({
-      getDefaultProps() {
-        return {
+    class AlertDemo extends Component {
+      state = {
+        visible: false
+      }
+      show = () => {
+        this.setState({visible: true});
+      }
+      render() {
+        let props = {
+          visible: this.state.visible,
           title: '标题',
           content: '确定删除？',
           btns: [{
@@ -142,32 +167,60 @@ let components = [
               this.hide();
             }
           }],
-          maskToHide: false
-        };
-      },
-      getInitialState() {
-        return {
-          visible: false
-        };
-      },
-      show() {
-        this.setState({visible: true});
-      },
-      render() {
+        }
         return (
           <div>
-            <span onClick={this.show} className="btn-secondary">showAlert</span>
-            <Alert visible={this.state.visible} {...this.props} />
+            <span onClick={this.show}>showAlert-1</span>
+            <Alert {...props} />
           </div>
         )
       }
-    })
+    };
     return <AlertDemo />;
   })(),
+  // Alert 无标题、1个按钮
   (() => {
-    let LayerListDemo = React.createClass({
-      getDefaultProps() {
-        return {
+    class AlertDemo extends Component {
+      state = {
+        visible: false
+      }
+      show = () => {
+        this.setState({visible: true});
+      }
+      render() {
+        let props = {
+          visible: this.state.visible,
+          content: '恭喜你，中奖了！',
+          btns: [{
+            name: '确定',
+            handler(btn) {
+              console.log('确定');
+              this.hide();
+            }
+          }],
+        }
+        return (
+          <div>
+            <span onClick={this.show}>showAlert-2</span>
+            <Alert {...props} />
+          </div>
+        )
+      }
+    };
+    return <AlertDemo />;
+  })(),
+  // LayerList
+  (() => {
+    class LayerListDemo extends Component {
+      state = {
+        visible: false
+      }
+      show = () => {
+        this.setState({visible: true});
+      }
+      render() {
+        let props = {
+          visible: this.state.visible,
           items: [{
             name: '中国'
           }, {
@@ -183,49 +236,42 @@ let components = [
             console.log('取消');
             this.hide();
           }
-        };
-      },
-      getInitialState() {
-        return {
-          visible: false
-        };
-      },
-      show() {
-        this.setState({visible: true});
-      },
-      render() {
+        }
+
         return (
           <div>
-            <span onClick={this.show} className="btn-secondary">showLayerList</span>
-            <LayerList visible={this.state.visible} {...this.props} />
+            <span onClick={this.show}>showLayerList</span>
+            <LayerList {...props} />
           </div>
         )
       }
-    })
-    return <LayerListDemo />
+    };
+    return <LayerListDemo />;
   })(),
+  // Calendar
   (() => {
     let
-      today = new Date(),
+      now = new Date(),
+      today = new Date(now.getFullYear(), now.getMonth(), now.getDate()),
       tomorrow = new Date(+today + 1000 * 60 * 60 * 24),
       dayAfterTomorrow = new Date(+tomorrow + 1000 * 60 * 60 * 24),
       props =  {
-        selected: new Date(2015, 9, 13),
+        selected: today,
         itemAction(date, format) {
           console.log(date, format(date, 'YYYY年M月D日'));
         },
-        specialDates: [
+        specialDates: [ // 特殊日期这个自由度较高，需要自定义设置，特殊日期可以覆盖或者叠加，自行定义。
           {
             date: { // 阳历
-              '0101': '元旦',
+              '0101': '元旦节',
               '0214': '情人节',
-              '0501': '劳动',
+              '0501': '劳动节',
               '0601': '儿童节',
               '0910': '教师节',
-              '1001': '国庆',
-              '1225': '圣诞'
+              '1001': '国庆节',
+              '1225': '圣诞节'
             },
-            handler(key, value) {
+            handler(key, value) { // 参数为date中的key、value
               let matchs = key.match(/\d{2}/g);
 
               return {
@@ -241,11 +287,12 @@ let components = [
           },
           {
             date: { // 阴历
-              '20150219': '春节',
-              '20150305': '元宵',
-              '20150405': '清明',
-              '20150620': '端午',
-              '20150927': '中秋'
+              '20160207': '除夕',
+              '20160208': '春节',
+              '20160222': '元宵节',
+              '20160404': '清明节',
+              '20160609': '端午节',
+              '20160915': '中秋节'
             },
             handler(key, value) {
               let matchs = key.match(/(\d{4})(\d{2})(\d{2})/);
@@ -283,40 +330,41 @@ let components = [
           },
           {
             date: { // 休
-              '20150101': '元旦',
-              '20150102': '元旦',
-              '20150103': '元旦',
+              '20160101': '元旦',
+              '20160102': '元旦',
+              '20160103': '元旦',
 
-              '20150218': '春节',
-              '20150219': '春节',
-              '20150220': '春节',
-              '20150221': '春节',
-              '20150222': '春节',
-              '20150223': '春节',
-              '20150224': '春节',
+              '20160207': '除夕',
+              '20160208': '春节',
+              '20160209': '春节',
+              '20160210': '春节',
+              '20160211': '春节',
+              '20160212': '春节',
+              '20160213': '春节',
 
-              '20150404': '清明',
-              '20150405': '清明',
-              '20150406': '清明',
+              '20160402': '清明节',
+              '20160403': '清明节',
+              '20160404': '清明节',
 
-              '20150501': '劳动节',
-              '20150502': '劳动节',
-              '20150503': '劳动节',
+              '20160430': '劳动节',
+              '20160501': '劳动节',
+              '20160502': '劳动节',
 
-              '20150620': '端午节',
-              '20150621': '端午节',
-              '20150622': '端午节',
+              '20160609': '端午节',
+              '20160610': '端午节',
+              '20160611': '端午节',
 
-              '20150926': '中秋节',
-              '20150927': '中秋节',
+              '20160915': '中秋节',
+              '20160916': '中秋节',
+              '20160917': '中秋节',
 
-              '20151001': '国庆',
-              '20151002': '国庆',
-              '20151003': '国庆',
-              '20151004': '国庆',
-              '20151005': '国庆',
-              '20151006': '国庆',
-              '20151007': '国庆'
+              '20161001': '国庆',
+              '20161002': '国庆',
+              '20161003': '国庆',
+              '20161004': '国庆',
+              '20161005': '国庆',
+              '20161006': '国庆',
+              '20161007': '国庆'
             },
             handler(key) {
               let matchs = key.match(/(\d{4})(\d{2})(\d{2})/);
@@ -335,10 +383,12 @@ let components = [
           },
           {
             date: { // 班
-              '20150104': '元旦_班',
-              '20150215': '除夕班',
-              '20150228': '春节班',
-              '20151010': '国庆_班'
+              '20160206': '除夕_班',
+              '20160214': '春节_班',
+              '20160612': '端午_班',
+              '20160918': '中秋_班',
+              '20161008': '国庆_班',
+              '20161009': '国庆_班'
             },
             handler(key) {
               let matchs = key.match(/(\d{4})(\d{2})(\d{2})/);
@@ -359,86 +409,74 @@ let components = [
       };
     return <Calendar {...props} />
   })(),
+  // Slider
   (() => {
     let props = {
-      data: [
-        {
-          name: '中国',
-          bg: 'red',
-        },
-        {
-          name: '美国',
-          bg: 'green'
-        },
-        {
-          name: '日本',
-          bg: 'blue'
-        },
-        {
-          name: '中国1',
-          bg: 'white',
-        },
-        {
-          name: '美国1',
-          bg: 'yellow'
-        },
-        {
-          name: '日本1',
-          bg: 'orange'
-        }
-      ],
-      defaultActive: 2,
-      wrapperRender(children) {
+      data: [{
+        name: '中国',
+        bg: 'red',
+      }, {
+        name: '俄罗斯',
+        bg: 'yellow'
+      }, {
+        name: '美国',
+        bg: 'orange'
+      }, {
+        name: '韩国',
+        bg: 'green'
+      }, {
+        name: '日本',
+        bg: 'blue'
+      }],
+      wrapperRender(children) { // wrapper自定义DOM
         return (
-          <section ref="wrapper" style={{width: '302px', height:'102px', border: '1px solid black', margin: '0 auto', overflow: 'hidden'}}>{children}</section>
+          <section ref="wrapper" style={{width: '300px', height:'100px', border: '1px solid black', margin: '0 auto', overflow: 'hidden'}}>{children}</section>
         )
       } ,
-      itemRender(item) {
+      itemRender(item) { // item自定义DOM
         return (
           <div style={{width: '100px', height: '100px', background: item.bg, textAlign: 'center', lineHeight: '100px'}}>{item.name}</div>
         )
       },
-      iScroll: {
+      iScroll: { // iScroll中的参数
         scrollX: true,
-        snap: 'li'
+        scrollY: false,
+        snap: 'li' // 每次移动单位
       },
+      defaultActive: 1,
       itemAction(item) {
         console.log(item.name);
       }
     };
     return <Slider {...props} />
   })(),
+  // ImgSlider
   (() => {
     let props = {
-      data: [
-        {
-          src: 'http://images.cnitblog.com/blog/294743/201412/051803252488182.jpg'
-        },
-        {
-          src: 'http://images.cnitblog.com/blog/294743/201412/051803075458022.jpg'
-        },
-        {
-          src: 'http://images.cnitblog.com/blog/294743/201412/051803148429260.jpg'
-        },
-        {
-          src: 'http://images.cnitblog.com/blog/294743/201412/051803198737858.jpg'
-        }
-      ],
+      data: [{
+        src: 'http://images.cnitblog.com/blog/294743/201412/051803252488182.jpg'
+      }, {
+        src: 'http://images.cnitblog.com/blog/294743/201412/051803075458022.jpg'
+      }, {
+        src: 'http://images.cnitblog.com/blog/294743/201412/051803148429260.jpg'
+      }, {
+        src: 'http://images.cnitblog.com/blog/294743/201412/051803198737858.jpg'
+      }],
       wrapperRender(children) {
         return (
           <section ref="wrapper" style={{width: '100%', overflow: 'hidden'}}>{children}</section>
         )
       },
-      scale: 2,
-      defaultActive: 1,
       itemRender(item) {
         return (
           <img src={item.src} />
         )
       },
+      defaultActive: 2,
       itemAction(item) {
         console.log(item.src);
-      }
+      },
+      scale: 2
     };
     return <ImgSlider {...props} />
   })(),

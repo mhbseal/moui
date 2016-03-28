@@ -1,0 +1,108 @@
+.cui_cldweek {
+    position      : fixed;
+    z-index       : 2;
+    top           : 48px;
+    left          : 0;
+    width         : 100%;
+    height        : auto;
+    overflow      : hidden;
+    font          : 400 12px/24px verdana;
+    border-bottom : 1px solid #c8c8c8;
+    background    : #f7f7f7
+}
+.cui_cldweek_top0 {
+    top : 0
+}
+.cui_cldweek li {
+    float      : left;
+    width      : 14%;
+    text-align : center
+}
+.cui_cldweek li:first-child, .cui_cldweek li:last-child {
+    width : 15%;
+    color : #ff902d
+}
+.cui_cldmonth {
+    height     : 40px;
+    text-align : center;
+    font       : 400 16px/50px verdana;
+    background : #fff
+}
+.cui_cldunit {
+    margin-bottom : 14px
+}
+.cui_cld_daybox {
+    overflow   : hidden;
+    background : #fff
+}
+.cui_cld_daybox li {
+    float      : left;
+    width      : 14%;
+    height     : 40px;
+    font       : 400 14px/45px verdana;
+    overflow   : hidden;
+    text-align : center
+}
+.cui_cld_daybox li:nth-of-type(7n), .cui_cld_daybox li:nth-of-type(7n+1) {
+    width : 15%;
+    color : #ff902d
+}
+.cui_cld_dayfuture {
+    background : #fff
+}
+.cui_cld_day_nocrtmonth {
+    visibility : hidden
+}
+.cui_cld_day_havetxt em, .cui_cld_nopro em, .cui_cld_haspro em, .cui_cld_daycrt em {
+    display     : block;
+    line-height : 20px;
+    font-size   : 12px
+}
+.cui_cld_day_havetxt i, .cui_cld_nopro i, .cui_cld_haspro i, .cui_cld_daycrt i {
+    display     : block;
+    line-height : 15px;
+    font-size   : 11px;
+    font-style  : normal;
+}
+.cui_cld_daycrt.cui_cld_daycrt_sl em {
+    line-height : inherit
+}
+.cui_cld_daybox li.cui_cld_day_hint {
+    color : #06a2d0
+}
+.cui_cld_daybox li.cui_cld_daypass {
+    color : #cfcfcf !important
+}
+.cui_cld_daycrt {
+    background : #06a2d0;
+    color      : #fff !important
+}
+.selected-departdate {
+    background: #06a2d0;
+}
+.icon-calendar-holiday, .icon-calendar-work {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 1px solid #ff902d;
+    line-height: 14px;
+    height: 16px;
+    width: 16px;
+    background: #fff;
+    text-align: center;
+    font-size: 12px;
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    transform: scale(0.7);
+    -webkit-transform-origin: right top;
+    -ms-transform-origin: right top;
+    transform-origin: right top;
+    box-sizing: border-box
+}
+.icon-calendar-holiday {
+    color: #52bce8;
+    border-color: #52bce8
+}
+.cui_cld_daybox li {
+    position: relative;
+}

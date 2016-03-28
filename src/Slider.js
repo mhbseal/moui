@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import IScroll from 'iscroll';
+import './slider.css';
 
 const noop = () => {};
 
-class Slider extends React.Component {
+export default class Slider extends Component {
+  static defaultProps = {
+    data: [],
+    wrapperRender: noop,
+    itemRender: noop,
+    iScroll: { // iScorll中对应的参数
+      scrollX: true,
+      scrollY: false
+    },
+    active: null,
+    defaultActive: null,
+    itemAction: noop,
+    scale: null // item宽高的比例(无特殊情况，一般用不到这个参数。。。在imgSlider中图片滚动中会用到)
+  }
   static propTypes = {
     data: React.PropTypes.array.isRequired,
     wrapperRender: React.PropTypes.func.isRequired,
@@ -11,70 +25,94 @@ class Slider extends React.Component {
     iScroll: React.PropTypes.object,
     defaultActive: React.PropTypes.number,
     active: React.PropTypes.number,
+    itemAction: React.PropTypes.func,
     scale: React.PropTypes.number
-  }
-  static defaultProps = {
-    data: [],
-    wrapperRender: noop,
-    itemRender: noop,
-    iScroll: {
-      scrollX: true
-    },
-    active: null,
-    defaultActive: null,
-    scale: null // w/h
   }
   constructor(props) {
     super(props);
+
+    let
+      {active, defaultActive} = props,
+      ret = 0;
+
+    if (active != null) {
+      ret = active;
+    } else if (defaultActive != null) {
+      ret = defaultActive;
+    }
+
     this.state = {
-      active: this.props.active || this.props.defaultActive || 0,
+      active: ret,
       itemWidth: null,
-      itemHeight: null,
+      itemHeight: null
     };
   }
   componentDidMount() {
     let
       {scale, iScroll} = this.props,
-      itemWidth = parseInt(getComputedStyle(this.getItemDom()).width); // 计算单位宽度
+      itemCss = getComputedStyle(this.getItemDom()),
+      itemWidth = parseInt(itemCss.width),
+      itemHeight = parseInt(itemCss.height);
 
-    this.setState({
-      itemWidth: itemWidth,
-      itemHeight: itemWidth/scale
-    }, () => {
-      this.scroll = new IScroll(this.refs.wrapper, Object.assign({}, iScroll, {startX: -this.state.active * itemWidth}));
-      this.scroll.on('scrollEnd', () => {
-        this.setIndex(this.scroll.currentPage.pageX);
+      this.setState({
+        itemWidth: itemWidth,
+        itemHeight: itemHeight
+      }, () => {
+        let options;
+        if (iScroll.scrollX) {
+          options = {startX: -this.state.active * itemWidth};
+        } else {
+          options = {startY: -this.state.active * itemHeight};
+        }
+        this.scroll = new IScroll(this.refs.wrapper, Object.assign({}, iScroll, options));
+        this.scroll.on('scrollEnd', () => {
+          this.setIndex(iScroll.scrollX ? this.scroll.currentPage.pageX : this.scroll.currentPage.pageY);
+        });
       });
-    });
   }
   componentWillUnmount() {
     this.scroll.destroy();
   }
   render() {
-    let {wrapperRender, data, itemAction, itemRender} = this.props;
+    let
+      {wrapperRender, data, itemAction, itemRender, iScroll, scale} = this.props,
+      {itemWidth, itemHeight} = this.state,
+      style;
+
+    if (iScroll.scrollX) {
+      style  = {
+        width: itemWidth * data.length,
+        height: scale ? itemWidth/scale : itemHeight
+      }
+    } else {
+      style  = {
+        width: scale ? itemHeight/scale : itemWidth,
+        height: itemHeight * data.length
+      }
+    }
 
     return (
       <div>
-        {wrapperRender(<div className="cm-slide" style={{width: this.state.itemWidth * data.length}}>
-          <ul ref="ul" className="cm-slide-list">
-            {data.map((item) => {
-              return (
-                <li key={item.name} onClick={itemAction.bind(this, item)} className="cm-slide-item">{itemRender(item)}</li>
-              )
-            })}
-          </ul>
-        </div>)}
+        {wrapperRender(
+          <div className="cm-slide" style={style}>
+            <ul ref="ul" className="cm-slide-list">
+              {data.map((item, i) => {
+                return (
+                  <li key={i} onClick={itemAction.bind(this, item)} className="cm-slide-item">{itemRender(item)}</li>
+                )
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     );
   }
-  setIndex(index) {
+  setIndex = (index) => {
     if (this.state.active !== index) {
       this.setState({active: index});
     }
   }
-  getItemDom() {
+  getItemDom = () => {
     return this.refs.ul.children[0]
   }
 };
-
-export default Slider;

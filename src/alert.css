@@ -1,0 +1,103 @@
+.cui-pop-box {
+    background    : #fff;
+    width         : 280px;
+    overflow      : hidden;
+    border-radius : 5px;
+}
+.cui-pop-box .cui-hd {
+    height      : 40px;
+    line-height : 40px;
+    font-size   : 1.2em;
+    color       : #fff;
+    background  : #099fde;
+    padding     : 0 10px;
+    position    : relative
+}
+.cui-roller-btns {
+    display : -webkit-box;
+    display : -moz-box;
+    display : -ms-flexbox;
+    display : -webkit-flex;
+    display : flex;
+    width   : 100%;
+    -webkit-box-flex : 1;
+    -moz-box-flex    : 1;
+    -webkit-flex     : 1;
+    -ms-flex         : 1;
+    flex             : 1;
+    background         : #fff;
+    border-top         : 1px solid #bcbcbc;
+    line-height        : 18px;
+    text-align         : center;
+    -webkit-box-sizing : border-box;
+    -moz-box-sizing    : border-box;
+    box-sizing         : border-box
+}
+.cui-flexbd {
+    -webkit-box-flex : 1;
+    -moz-box-flex    : 1;
+    -webkit-flex     : 1;
+    -ms-flex         : 1;
+    flex             : 1
+}
+.cui-roller-btns .cui-flexbd {
+    padding : 12px 0;
+    color   : #099fde
+}
+.cui-roller-btns a {
+    color : #099fde
+}
+.cui-roller-btns .cui-flexbd:active {
+    opacity : .75
+}
+.cui-roller-btns .cui-flexbd:nth-of-type(2) {
+    border-left : 1px solid rgba(0, 0, 0, 0.3)
+}
+.cui-error-tips {
+    color      : #000;
+    padding    : 20px;
+    text-align : center
+}
+.cui-pop-box .cui-hd .lab-close-area {
+    position: absolute;
+    width: 50px;
+    height: 100%;
+    right: 0;
+    top: 0
+}
+
+.cui-pop-box .cui-hd .cui-top-close {
+    width: 40px;
+    height: 40px;
+    float: right;
+    line-height: 40px;
+    color: transparent;
+    text-align: center;
+    font-weight: 700;
+    position: relative
+}
+
+.cui-pop-box .cui-hd .cui-top-close:before,.cui-pop-box .cui-hd .cui-top-close:after {
+    width: 2px;
+    height: 16px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -8px 0 0 -1px;
+    background: #fff;
+    content: ""
+}
+
+.cui-pop-box .cui-hd .cui-top-close:before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg)
+}
+
+.cui-pop-box .cui-hd .cui-top-close:after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg)
+}

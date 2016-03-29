@@ -32,7 +32,8 @@ config = {
   module: {
     loaders: [
       { test: /\.js$/, loaders: ['babel?stage=0'] },
-      { test: /\.css$/, loader: ExtractTextPlugin.extract('css') }
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('css') },
+      { test: /\.(png|jpg)$/, loader: 'url?limit=1' }
     ]
   },
   plugins: [

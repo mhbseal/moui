@@ -438,12 +438,6 @@ let components = [
           <div style={{width: '100px', height: '100px', background: item.bg, textAlign: 'center', lineHeight: '100px'}}>{item.name}</div>
         )
       },
-      iScroll: { // iScroll中的参数
-        scrollX: true,
-        scrollY: false,
-        snap: 'li' // 每次移动单位
-      },
-      defaultActive: 1,
       itemAction(item) {
         console.log(item.name);
       }

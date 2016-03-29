@@ -76,6 +76,8 @@
   overflow : hidden
 }
 .cm-num-adjust input.cm-adjust-view {
+  -webkit-appearance: none;
+  border-radius: 0;
   color: #099fde;
 }
 .cm-num-adjust input.cm-adjust-view:focus {

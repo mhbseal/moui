@@ -10,6 +10,7 @@ export default class Slider extends Component {
     wrapperRender: noop,
     itemRender: noop,
     iScroll: { // iScorll中对应的参数
+      eventPassthrough: true, // 非iScroll方向保持原生滚动
       scrollX: true,
       scrollY: false
     },
@@ -58,16 +59,14 @@ export default class Slider extends Component {
         itemWidth: itemWidth,
         itemHeight: itemHeight
       }, () => {
-        let options;
-        if (iScroll.scrollX) {
-          options = {startX: -this.state.active * itemWidth};
-        } else {
-          options = {startY: -this.state.active * itemHeight};
+        iScroll.options = iScroll.scrollX ? {startX: -this.state.active * itemWidth} : {startY: -this.state.active * itemHeight};
+        this.scroll = new IScroll(this.refs.wrapper, iScroll);
+
+        if (iScroll.snap) {
+          this.scroll.on('scrollEnd', () => {
+            this.setIndex(iScroll.scrollX ? this.scroll.currentPage.pageX : this.scroll.currentPage.pageY);
+          });
         }
-        this.scroll = new IScroll(this.refs.wrapper, Object.assign({}, iScroll, options));
-        this.scroll.on('scrollEnd', () => {
-          this.setIndex(iScroll.scrollX ? this.scroll.currentPage.pageX : this.scroll.currentPage.pageY);
-        });
       });
   }
   componentWillUnmount() {

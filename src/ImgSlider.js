@@ -41,4 +41,10 @@ export default class ImgSlider extends Slider {
   }
 }
 
-ImgSlider.defaultProps.iScroll.snap = true;
+ImgSlider.defaultProps.iScroll = {
+  eventPassthrough: true, // 非iScroll方向保持原生滚动
+  scrollX: true,
+  scrollY: false,
+  momentum: false, // 快速触摸屏幕
+  snap: true
+}

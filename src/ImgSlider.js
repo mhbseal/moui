@@ -3,6 +3,15 @@ import Slider from './Slider';
 import './imgSlider.css';
 
 export default class ImgSlider extends Slider {
+  static defaultProps = {
+    iScroll: {
+      eventPassthrough: true, // 非iScroll方向保持原生滚动
+      scrollX: true,
+      scrollY: false,
+      momentum: false, // 快速触摸屏幕
+      snap: true
+    }
+  }
   render() {
     let
       { wrapperRender, data, itemAction, itemRender, iScroll, scale } = this.props,
@@ -39,12 +48,4 @@ export default class ImgSlider extends Slider {
   getItemDom = () => {
     return this.refs.wrapper
   }
-}
-
-ImgSlider.defaultProps.iScroll = {
-  eventPassthrough: true, // 非iScroll方向保持原生滚动
-  scrollX: true,
-  scrollY: false,
-  momentum: false, // 快速触摸屏幕
-  snap: true
 }

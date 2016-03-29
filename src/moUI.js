@@ -1,8 +1,4 @@
-﻿import './moUI.css';
-import FastClick from 'fastclick';
-window.addEventListener('load', () => {
-  FastClick.attach(document.body);
-});
+﻿import './moui.css';
 export Switch from './Switch';
 export Tab from './Tab';
 export Num from './Num';

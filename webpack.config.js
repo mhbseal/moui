@@ -11,12 +11,12 @@ var
 
 config = {
   entry: [
-    './src/moUI'
+    './src/moui'
   ],
   output: {
     path: './dist',
-    filename: 'moUI' + (isProd ? '.min' : '') + '.js',
-    library: 'moUI',
+    filename: 'moui' + (isProd ? '.min' : '') + '.js',
+    library: 'moui',
     libraryTarget: 'umd'
   },
   externals: [
@@ -37,9 +37,9 @@ config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('tourUI' + (isProd ? '.min' : '') + '.css', { allChunks: true }),
+    new ExtractTextPlugin('moui' + (isProd ? '.min' : '') + '.css', { allChunks: true }),
     new webpack.BannerPlugin(
-      'moUI v' + version + '\n' +
+      'moui v' + version + '\n' +
       '(c) 2014-' + new Date().getFullYear() + ' Mu Haibao'
     )
   ]

@@ -1,0 +1,10 @@
+/node_modules
+
+# webstorm配置
+.idea
+
+# mac cache
+.DS_Store
+
+# npm
+npm-debug.log

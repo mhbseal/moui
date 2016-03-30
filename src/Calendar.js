@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { date } from 'mo2js';
+import date from 'mo2js/src/date';
 import './calendar.css';
 
 export default class CaldayComponentendar extends Component {

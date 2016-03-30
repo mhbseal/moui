@@ -11,7 +11,7 @@ var
 
 config = {
   entry: [
-    './src/moui'
+    './src/index'
   ],
   output: {
     path: './dist',
@@ -33,7 +33,7 @@ config = {
     loaders: [
       { test: /\.js$/, loaders: ['babel?stage=0'] },
       { test: /\.css$/, loader: ExtractTextPlugin.extract('css') },
-      { test: /\.(png|jpg)$/, loader: 'url?limit=1' }
+      { test: /\.(png|jpg)$/, loader: 'file?name=img/[].[name].[ext]' }
     ]
   },
   plugins: [

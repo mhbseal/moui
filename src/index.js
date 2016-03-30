@@ -1,4 +1,4 @@
-﻿import './moui.css';
+﻿import './index.css';
 export Switch from './Switch';
 export Tab from './Tab';
 export Num from './Num';
